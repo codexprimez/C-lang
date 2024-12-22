@@ -1,0 +1,375 @@
+DATABASE(db)
+it is collection of data that can be easily accessed(digital)eg
+A software prog used to manage this db is called as dbms
+->it cannot be access directly db
+-<dbms act as layer 
+->mySQL is software program
+Types of Db
+->relation/datatabular/rdbms             /non relation db
+->mysql,microsqlserver,oracle         mongodb
+SQL(STRUCTURED QUERY LANG)--non case sensitive
+it is a prog lang used to interact with rd
+it is used to perform CRUD operations
+1.Create 2.read 3.update 4.delete
+Initially it was SEQl (IBM)->SQL
+DATA BASE STRUCTURE
+DATABASE 
+TABLE1
+TABLE2 
+row(individualdata)/col(schemas/design/structure)
+SQL datatypes 
+char,varchar,blob,bit(2),boolean,float,double,int
+date,year,tinyint(-128>127),bigint,decimal(5,2)
+signed/unsigned
+tinyint unsigned(0-255)
+TYPES OF SQL COMMANDS
+1.DDL(DATA DEFINETION LANG)-CREATE,ALTER,RENAME,TRUNCATE,DROP
+2.DQL(DATA QUERY LANG)-SELECT
+3.DML(DATA MANIPULATION LANG)-INSERT,UPDATE,DELETE
+4.DCL(DATA CONTOL LANG)-GRANT OR REVOKE PERMISSION TO USER
+5.TCL(TRANSACTION CONTROL LANG)-START TRANSACTION,COMMIT
+--------------------------------------------------
+create database college;
+drop database college;
+use college; /tables are created in this
+create table student(             --direct table
+         id int primary key,
+         name varchar(50),
+         age int not Null
+
+); 
+insert into student (id,name,age) values(1,"shadow",24),
+(),();
+                                   
+select * from student;
+show databases;
+show tables;
+create database if not exists college;
+drop database if exist college;
+//pk-unique,not null
+------------------------------------------------
+alter table employees(evertime sperate)
+1.rename column phoneno to email;(datatype not change)
+2.Modify column email varchar(100);#datatype
+3.Modify email varchar(100)-1
+  after lastname/first;-2  #position change
+5.drop column email;#drop colmn
+-----------------------------------------------
+===Table related quries==="*"=all columns
+select * from student;//display all columns
+
+--------id,name,position
+insert into student (id,name)values(1,"s");
+->if missing takes as empty automatic
+if we use (id,name) before values
+update above cmd
+
+
+insert into student values(2,""),(3,""),();
+keys -
+1.primary key (unique,not null)#single pk
+2.foreign key (duplicate,null values )
+---CONSTRAINS
+not null
+unique     ---primary key
+id primary key
+primary key(id,name)
+linking foreign key table
+  create table idl(
+          cid int,
+          foregin key (cid) referernce customer(id)
+);
+#droping a foreign key
+ALTER TABLE ID1                      
+DROP FOREIGN KEY TRANSACTION_IBFK_1;
+#apply fk to alredy table
+alter table transaction                  -----------------X
+add constraint fk_customer_id
+foreign key()
+
+
+sal int default 25000 -/if empty auto declare
+-cHECK
+-constrain age_check check (age>=18 AND city="delhi")
+- age int check (age>=18)
+--use name in ""
+--select commands
+--select clomn1,clonm2 from college;
+select distinct city from student;
+-----------------------------------------------------
+update emp
+set hourly_pay=10.25,hire_date="2023-01-02"     /NULL
+where emp_id=6;
+select * from emp;
+---------------where Clause-----------
+select * from student where marks>80;
+select * from student where city="Mumbai";
+select * from student where marks>80 and city="mumbai";
+select * from employees where hire-date is NUll;
+                                        is not NULL;
+------
+#deleting a row
+delete from emp
+where emp_id=6;
+select * from emp;
+--------------------
+set autocommit=OFF;#manually save each tracsaction
+Commit
+perform task
+ROllBack
+----------------------------------------------------
+create table test(
+ 	mydate DATE,
+	my_time TIME,
+	my_datetime DATETIME
+);
+insert into test values(CURRENT_DATE()+1,CURRENT_TIME(),NOW());
+seperate 
+drop test;
+-----------------------------------------------------
+create table products (
+	product_id INT,
+	product_name varchar(25) UNIQUE,
+	price DECIMAL(4,2) #4digit 2decimals
+
+);
+ALTER TABLE PRODUCTS   #datatype add to productname
+ADD CONSTRAINT
+UNIQUE(PRODUCT_NAME)/primarykey(transaction_id)
+--------------------------------------------------
+ALTER TABLE PRODUCTS   #CHECK CONSTRAIN
+ADD CONSTRAINT  CHK_HOURLY_PAY CHECK (HORLY_PAY>=12)
+----------------------------------------------------
+ATER TABLE EMP    #COLUMN ADD
+ADD COLUMN JOB VARCHAR(25) AFTER HOURLY_PAY;
+
+UPDATE EMP
+SET JOB="CASIER"
+WHERE EMP_ID =1;
+-
+ALTER TABLE PRODUCT
+DROP CHECK CHK_HOURLY_PAY  
+--------------------------------------------------
+ALTER TABLE PRODUCTS
+MODIFY PRICE DECIMAL(4,2) NOT NULL;
+------------------------------------
+delete from products
+where product_id>=10
+select * from products;
+---------------------------------------------
+alter table products
+alter price set default 0;
+--------------------------------------------
+#auto_increment id increa from 1 automatic
+Create table transaction(
+	trac_id int primarykey AUTo_increment,
+	amount decimal(5,2)
+);
+insert into transa (amount)values(345);#repeat
+------------------------------------------------
+alter table transaction
+auto_increment=1000;
+delete from transaction
+-------------------------------
+    tranc_date  datetime default now()(automatically dateof tranc)
+using operators in where
+commenting --
+arithmetic Operators--+,-,*,/,%
+Comparision Operators-=,!=,>=,<=  eg.marks+10>90
+-->Logical Operators-AND(T,T),OR,NOT,IN,BETWEEN,ALL,LIKE,ANY
+BETWEEN-(selects for a given range)(inclusive)
+Eg.select * from student where marks BETWEEN 80 AND 90;
+IN-(matches any value in the list)
+eg.select * from student where city in ("DELHI","MUMBAI");
+NOT-
+eg.select * from student where city not in ("DELHI","MUMBAI");
+Bitwise Operators-&(bitwise and),|(bitwise OR)
+select * from student limit 3;
+select * from student order by city/marks asc;desc                   
+order by amount desc ,customer_id asc;
+->top 3 students-select * from student order by marks desc limit 3;
+-LIKE
+select * from emp 
+where first_name like "s%" --sp%
+                 like "____-__-02"#wild card cha
+--------------Aggregate Functions---------------
+Agregate function perform a cal on set of values,and return a single value
+..COUNT()
+select count(rollno) from student;
+select count(rollno) as count from student; #alising
+..MAX()
+ select max(marks) from student;
+..MIN()
+..SUM()
+..AVG()	
+--group by with some
+select city,count(name) from student GROUP by city;
+ (gives no of names in in a city) 
+
+
+
+1:38 PYQ
+Q.write a query to find avg marks in each city in asc order
+select city,avg(marks) from student group by city order by marks asc;
+Q.find the total payment acc to each paymethod
+netbanking 
+credit 
+debit
+select mode,count(customers) from payment group by mode;
+acc to grad students
+select grade,count(rollno) from stud group by grade order by city asc;
+where(rows condn)
+Having(on group condn)
+select city,count(rollno) from student group by city  having max(marks)>90;
+SELECT
+FROM
+WHERE
+GROUP BY
+HAVING
+ORDER BY CITY ASC;
+>>update (to update existing rows)
+update student
+set col1=val1,col2=val2 where condn;
+update student set grade="0" where grade="A";
+set sql_safe_updates=0;
+
+----
+update student set grade="B" where marks between 80 and 90/Grade="0";
+---
+update student set marks=marks+1;/mcq wrong question
+---
+delete(to delete existing rows)
+DELETE FROM STUDENT where marks<33;
+foregin key
+cascading Fk
+if a delete a item that table related to other will also  dep,teacher
+Create table student(
+id INT primary key,
+foreign key(courseID) references course(id),
+on delete cascade==when a FK is deleted,delete row
+
+fk --------------
+on delete set null;
+on update cascade;
+);
+#set fk =null #temperary
+
+two tables having same primary key and link bt them
+EEEDIAGRAM--display tables(reengineering)
+DROP/TRUNCATE
+DROP-deletes the table
+Truncate-delete the data but Table exist
+Truncate table student;                   
+/===\
+to change colmn name TO FULLNAME
+alter table student change name full_NAME;
+b.del all the students mark les than 80;
+delete from student where marks<80;
+c.dele the colmn for grades
+alter table student drop column grade;
+---joins in SQL----
+empltable    saltable
+id,name       id,sal
+join--is used to combine rows from two or more tables,based on a related column btw them.
+fk not necessary
+-------------------TYPES OF JOINS--------------
+1.innerjoin  (venn diagram)-RETURNS RECORDS THAT HAVE MATCHING VALUES IN BOTH TABLES
+SELECT COLUMN FROM TABLE INNER JOIN TABLEB ON TABLEA.COL_NAME=TABLEB.COL_NAME
+Eg.select * from student inner join course on student.id=course.id;
+student-table1 ,course-table2
+#display only colmns except common then *>colmns
+                        as s              as c 
+-Rightjoin(returns all records from the right table,and the matched records from left table)         
+2.leftjoin
+3.rightjoin
+4.fulljoin-Returns all records when there is a match in either left or right table
+(not in mysql)
+leftjoin union rightjoin
+-------------------------
+Left Exclusive joint         right
+where b.id is NULL;
+---self join (in this table is join to itself )
+select a.name as manager_name b.name from employee as a join emp as b on a.id=b.managerid;
+
+---UNION(combines two or more select statments)--
+select * from tableA union select * from tableb; (nocolmns,datatypes,sameorder same)
+---------------------------UNION ALL(ALLOW DUPLICATES) (inplace of UNION)
+SubQUERIES/INNER QUERY/NESTED QUERY IS A QUERY WITHIN Another SQL Query
+-it involves 2 select statements
+Q.get names of all students who scored more than class avg
+step1-avg marks query
+step2-scored marks >avg(marks)
+select name,marks from student where marks > (select avg(marks) from student); 
+Q.find the names of all students with even roll no.
+step1- even roll -select rollno from student where rollno%2=0;
+step2-names of all stu select name from student where
+select name from student where rollno in (select rollno from student where rollno%2=0)
+---from nested query---   where, from,select
+Q.find the max marks from students of delhi
+step1- select * from student  where city="delhi"
+step2-select max(marks) from ()
+--^select max(marks) from student where city=""
+select (select avg(marks) from student),name from student;
+-----------------
+---------virtual table dispaly
+create view view1 as Select rollno,names,marks from student
+select * from view1;/drop view view1; Temperray
+drop view
+-----------------------------------------------
+delimiter$$
+create procedure get_customers()
+Begin
+	select * from customers;
+end $$
+delimiter;
+
+
+
+call get_customer()
+
+drop procedure get_customer()
+------------------------------------------------
+transaction use colmn(MYSQL)
+INDEX(BTREE DATA STRUCTURE)--lots of customers
+CREATE INDEX index_name ON table_name (column_name);
+
+--------triggers-------(auto statment execute)
+CREATE TRIGGER trigger_name
+AFTER INSERT ON table_name
+FOR EACH ROW
+BEGIN
+    -- SQL statements to be executed
+END;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
